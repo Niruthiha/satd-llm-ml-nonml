@@ -1,107 +1,126 @@
-# SATD Genealogy Analysis Pipeline (RQ4 - Project-Level)
+
+# SATD Genealogy Analysis Pipeline
 
 This README explains the 3-phase "Genealogy-Level" pipeline and includes the specific instructions you requested about how to re-run it for the **nonml** and **llm** cohorts.
 
 ---
 
-## Overview
+# SATD Analysis Replication Pipeline
 
-This directory contains the Python scripts to replicate the "Genealogy-Level" (or "Project-Level") analysis from the Bhatia et al. (2024) paper. This pipeline analyzes SATD from the perspective of the project's start date, as described in their **SATD_genealogy.ipynb** and **RQ4.ipynb** notebooks.
-
-The analysis answers two main questions:
-
-1. **Introduction:** How long from a project's start until a typical SATD comment is introduced?  
-2. **Removal:** How long does a typical SATD comment survive from its introduction until it's removed?
-
-This pipeline is run separately for each cohort (**ML**, **Non-ML**, **LLM**).  
-The scripts are pre-configured for **ML** only; instructions for running the others appear later.
+This project contains two distinct Python pipelines for replicating and extending the quantitative SATD survival analyses from **Bhatia et al. (2024)**.
 
 ---
 
-## Prerequisites
+## 1. Genealogy-Level Analysis (Project-Start)
 
-### Environment
+- Measures SATD lifecycle **from the project's start date**.  
+- Replicates methodology from the original `SATD_genealogy.ipynb` and `RQ4.ipynb` notebooks.  
+- Implemented as a **3‑phase pipeline**:
+  - `rq4_phase2.py`
+  - `rq4_phase3.py`
+  - `rq4_phase4.py`  
+- Must be run **separately for each cohort** (ML, Non-ML, LLM).
+
+---
+
+## 2. File-Level Analysis (File-Creation)
+
+- Measures SATD lifecycle **from the file’s creation date**.
+- Replicates methodology from **Table 4** of Bhatia et al. (2024).
+- Implemented as a **single script**: `rq4file_level.py`
+- Processes **all cohorts in one run**.
+
+---
+
+# Prerequisites
+
+## Environment
 - Python 3.9+
-- Java (must be accessible at `/usr/bin/java`)
+- Java 8+ (`/usr/bin/java` must be set in `rq4_phase3.py`)
+- Git
 
-### Repositories
-- All cloned repositories must live here:  
-  `/root/satd_detection/cloned_repos/`
-
-### Configuration Files
-Place these in `/root/satd_detection/`:
-- `ml_159.txt`
-- `nonml_159.txt`
-- `llm_159.txt`
-
-### SATD Detector
-- `satd_detector.jar` must be located at:  
-  [`/root/satd_detection/satd_detector.jar`](https://dl.acm.org/doi/10.1145/3183440.3183478)
-
-### Python Libraries
+## Python Libraries
 Install:
 ```bash
 pip install pandas pydriller gitpython tqdm lifelines matplotlib
 ```
 
+## Required Files & Directories
+
+Place the following:
+
+### Repositories  
+`/root/satd_detection/cloned_repos/`  
+Contains all cloned repositories.
+
+### Cohort Lists  
+Located at `/root/satd_detection/`:
+- `ml_159.txt`
+- `nonml_159.txt`
+- `llm_159.txt`
+
+### SATD Detector  
+[`/root/satd_detection/satd_detector.jar`](https://dl.acm.org/doi/10.1145/3183440.3183478)
+
+### RQ1 Predictions  
+`/root/satd_detection/RQ1/outputs/`:
+- `ml_predictions.tsv`
+- `nonml_predictions.tsv`
+- `llm_predictions.tsv`
+
+### Pipeline Output Directories
+- Genealogy-Level outputs → `/root/satd_detection/satd_work_repl/outputs/`
+- File-Level outputs → `/root/satd_detection/file_level_survival/`
+
 ---
 
-## Pipeline Workflow (ML Cohort Example)
+# Analysis 1: Genealogy-Level Pipeline (Project-Start)
 
-This analysis has **3 phases** and they must be executed **in order**.
+This is a **3-phase pipeline** configured by default for ML.
 
 ---
 
-### **Phase 1: Genealogy Extraction**
+## Phase 2: Genealogy Extraction
+- Scans full git history of each repository in a cohort.
+- Extracts metadata for all `.py` file modifications.
 
 **Script:** `rq4_phase2.py`  
-**Action:** Mines git history of repos listed in `ml_159.txt`.  
+**Input:** `ml_159.txt`  
 **Output:** `genealogy_ml_modifications.csv.gz`
-
-This step scans *all* commits and extracts `.py` file modification metadata.
 
 ---
 
-### **Phase 2: SATD Labeling**
+## Phase 3: SATD Labeling
+- Extracts added/removed comments.
+- Runs the Java SATD detector.
 
 **Script:** `rq4_phase3.py`  
 **Input:** `genealogy_ml_modifications.csv.gz`  
-**Action:** Extracts added/removed comments and runs the Java SATD detector.  
 **Output:** `genealogy_ml_labeled.csv.gz`
-
-This step labels ~1.2M comments as *SATD* or *Not SATD*.
 
 ---
 
-### **Phase 3: Survival Analysis**
+## Phase 4: Survival Analysis
+- Computes survival curves and median times.
 
 **Script:** `rq4_phase4.py`  
 **Input:** `genealogy_ml_labeled.csv.gz`  
-**Action:** Computes survival curves for SATD introduction and removal.  
-**Output:**
-- `genealogy_ml_summary.csv`
-- `genealogy_ml_intro_survival.png`
-- `genealogy_ml_removal_survival.png`
+**Output:**  
+- `genealogy_ml_summary.csv`  
+- Survival plots
 
 ---
 
-## How to Run for **Non-ML** and **LLM** Cohorts
+# How to Replicate for Non-ML and LLM Cohorts
 
-The scripts are hardcoded for ML.  
-To run the pipeline for `nonml` or `llm`, you must **edit each of the 3 scripts**.
-
----
-
-## Example: Running the **nonml** Cohort
+Edit **all 3 scripts** for each cohort.
 
 ---
 
-### **1. Edit `rq4_phase2.py`**
+## Example: Running the *nonml* Cohort
 
-Change repository config and output filename:
-
+### 1. Edit `rq4_phase2.py`
 ```python
-# === In rq4_phase2.py ===
 REPO_CONFIGS = {
     "nonml": {
         "urls_file": TXT_FILE_DIR / "nonml_159.txt",
@@ -117,12 +136,8 @@ python rq4_phase2.py
 
 ---
 
-### **2. Edit `rq4_phase3.py`**
-
-Change input and output file names:
-
+### 2. Edit `rq4_phase3.py`
 ```python
-# === In rq4_phase3.py ===
 INPUT_CSV_GZ = IN_DIR / "genealogy_nonml_modifications.csv.gz"
 OUTPUT_LABELED_CSV_GZ = OUT_DIR / "genealogy_nonml_labeled.csv.gz"
 ```
@@ -134,12 +149,10 @@ python rq4_phase3.py
 
 ---
 
-### **3. Edit `rq4_phase4.py`**
-
-Update labeled input file, outputs, plot labels, and cohort metadata:
+### 3. Edit `rq4_phase4.py`
+Update inputs, outputs, labels, and cohort string:
 
 ```python
-# === In rq4_phase4.py ===
 INPUT_LABELED_CSV_GZ = IN_DIR / "genealogy_nonml_labeled.csv.gz"
 
 OUTPUT_INTRO_PLOT = OUT_DIR / "genealogy_nonml_intro_survival.png"
@@ -158,16 +171,41 @@ Run:
 python rq4_phase4.py
 ```
 
----
-
-## Running for the **LLM** Cohort
-
-Repeat all three steps above, replacing:
-- `nonml` → `llm`
-- `nonml_159.txt` → `llm_159.txt`
-- All filenames and labels accordingly.
+Repeat this for the **llm** cohort, replacing `nonml` → `llm`.
 
 ---
 
-## End of Document
+# Analysis 2: File-Level Pipeline (File-Creation)
+
+This pipeline requires **no configuration changes**.
+
+---
+
+## Script: `rq4file_level.py`
+This script:
+
+- Processes **ML**, **Non-ML**, and **LLM** automatically  
+- Computes:
+  - Time from file creation to first SATD
+  - Time from first SATD to removal (if applicable)
+- Saves outputs to `/root/satd_detection/file_level_survival/`
+
+### Run:
+```bash
+python rq4file_level.py
+```
+
+### Output Includes:
+- Per-cohort CSVs:  
+  - `intro_ml_files.csv`  
+  - `removal_llm_files.csv`  
+  - etc.
+- Final comparison plots:  
+  - `km_intro.png`  
+  - `km_removal.png`
+- Console summary with `[STATS]` for all cohorts.
+
+---
+
+# End of Document
 
