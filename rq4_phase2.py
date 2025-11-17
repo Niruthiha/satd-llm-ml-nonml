@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-phase2_genealogy_extraction_ml_only.py (ML Cohort Only)
+rq4_phase2.py (ML Cohort Only)
 
 This script performs the "Genealogy Extraction" phase for ML cohort only.
 It traverses the entire commit history of ML repositories specified in the
