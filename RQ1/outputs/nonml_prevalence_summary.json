@@ -1,0 +1,10 @@
+{
+  "cohort": "nonml",
+  "n_repos_processed": 159,
+  "stats": {
+    "satd": 3890,
+    "total": 120683,
+    "prevalence_pct": 3.2233206002502426
+  },
+  "predictions_tsv": "/root/satd_detection/RQ1/outputs/nonml_predictions.tsv"
+}

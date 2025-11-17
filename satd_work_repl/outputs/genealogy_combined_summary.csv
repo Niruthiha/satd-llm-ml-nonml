@@ -1,0 +1,7 @@
+cohort,analysis,median_days,event_rate_pct,n_subjects
+LLM,Introduction,492.0,,59172
+ML,Introduction,204.0,,19636
+Non-ML,Introduction,1005.0,,8888
+LLM,Removal,553.0,49.07908724566739,40449
+ML,Removal,401.0,53.90707497360084,13258
+Non-ML,Removal,776.0,55.76487252124645,7060

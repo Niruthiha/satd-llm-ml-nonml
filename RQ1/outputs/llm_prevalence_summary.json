@@ -1,0 +1,10 @@
+{
+  "cohort": "llm",
+  "n_repos_processed": 155,
+  "stats": {
+    "satd": 20315,
+    "total": 514071,
+    "prevalence_pct": 3.9517887606964797
+  },
+  "predictions_tsv": "/root/satd_detection/RQ1/outputs/llm_predictions.tsv"
+}

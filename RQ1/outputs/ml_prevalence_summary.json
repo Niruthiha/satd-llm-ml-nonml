@@ -1,0 +1,10 @@
+{
+  "cohort": "ml",
+  "n_repos_processed": 157,
+  "stats": {
+    "satd": 6291,
+    "total": 153585,
+    "prevalence_pct": 4.096103135071784
+  },
+  "predictions_tsv": "/root/satd_detection/RQ1/outputs/ml_predictions.tsv"
+}
