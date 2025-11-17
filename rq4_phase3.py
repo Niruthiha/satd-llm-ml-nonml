@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-phase3_satd_labeling.py (LLM Cohort Only)
+rq4_phase3.py (ML Cohort Only)
 
 This script performs the "SATD Labeling" phase (like SATD_RQ1_RQ2.ipynb).
-It consumes the large CSV from Phase 2 (genealogy_llm_modifications.csv.gz),
+It consumes the large CSV from Phase 2 (genealogy_ml_modifications.csv.gz),
 parses the 'm_diff' column to extract added/removed comments, and runs
 the Java SATD detector on them.
 
