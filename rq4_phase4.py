@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-phase4_survival_analysis_ml.py (LLM Cohort Only)
+rq4_phase4.py (ml Cohort Only)
 
 This script performs the "Survival Analysis" phase (like RQ4.ipynb).
-It consumes the labeled CSV from Phase 3 (genealogy_llm_labeled.csv.gz)
+It consumes the labeled CSV from Phase 3 (genealogy_ml_labeled.csv.gz)
 and produces the final survival analysis plots and summary statistics
-for the LLM cohort.
+for the ml cohort.
 """
 
 import os
@@ -35,12 +35,12 @@ IN_DIR = Path("/root/satd_detection/satd_work_repl/outputs").resolve()
 OUT_DIR = IN_DIR  # Save outputs to the same directory
 
 # Input file from Phase 3
-INPUT_LABELED_CSV_GZ = IN_DIR / "genealogy_llm_labeled.csv.gz"
+INPUT_LABELED_CSV_GZ = IN_DIR / "genealogy_ml_labeled.csv.gz"
 
 # Output files
-OUTPUT_INTRO_PLOT = OUT_DIR / "genealogy_llm_intro_survival.png"
-OUTPUT_REMOVAL_PLOT = OUT_DIR / "genealogy_llm_removal_survival.png"
-OUTPUT_SUMMARY = OUT_DIR / "genealogy_llm_summary.csv"
+OUTPUT_INTRO_PLOT = OUT_DIR / "genealogy_ml_intro_survival.png"
+OUTPUT_REMOVAL_PLOT = OUT_DIR / "genealogy_ml_removal_survival.png"
+OUTPUT_SUMMARY = OUT_DIR / "genealogy_ml_summary.csv"
 
 # ===================== HELPERS =====================
 
@@ -54,7 +54,7 @@ def km_median(durations: pd.Series, events: pd.Series) -> float | None:
 def plot_km(data: pd.DataFrame, time_col: str, event_col: str, title: str, xlabel: str, ylabel: str, outfile: Path):
     fig, ax = plt.subplots(figsize=(10, 7))
     kmf = KaplanMeierFitter()
-    kmf.fit(durations=data[time_col], event_observed=data[event_col], label="LLM Cohort")
+    kmf.fit(durations=data[time_col], event_observed=data[event_col], label="ml Cohort")
     kmf.plot(ci_show=True, ax=ax)
     
     ax.set_xlabel(xlabel)
@@ -70,7 +70,7 @@ def plot_km(data: pd.DataFrame, time_col: str, event_col: str, title: str, xlabe
 # ===================== MAIN =====================
 
 def main():
-    print("Starting Phase 4: Survival Analysis (LLM COHORT ONLY)")
+    print("Starting Phase 4: Survival Analysis (ml COHORT ONLY)")
     print(f"Input file: {INPUT_LABELED_CSV_GZ}")
     print("=" * 60)
 
@@ -134,7 +134,7 @@ def main():
         
         plot_km(
             intro_df, 'time_elapsed_days', 'event_observed',
-            'SATD Introduction (Genealogy Method, LLM Cohort)',
+            'SATD Introduction (Genealogy Method, ml Cohort)',
             'Days from Project Start',
             'Probability of Being SATD-Free',
             OUTPUT_INTRO_PLOT
@@ -187,7 +187,7 @@ def main():
 
     plot_km(
         removal_df, 'survival_days', 'event_observed',
-        'SATD Removal (Genealogy Method, LLM Cohort)',
+        'SATD Removal (Genealogy Method, ml Cohort)',
         'Days from SATD Introduction',
         'Probability SATD Still Present',
         OUTPUT_REMOVAL_PLOT
@@ -202,7 +202,7 @@ def main():
     print("[4/4] Saving summary file...")
     
     summary = {
-        "cohort": "llm",
+        "cohort": "ml",
         "total_comments_processed": len(df),
         "total_satd_comments": len(satd_df),
         "total_satd_instances": len(removal_df),
