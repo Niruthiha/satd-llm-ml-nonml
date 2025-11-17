@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """
 
-RQ5
-part5.py  —  File-level SATD survival (paper-faithful) with robust git handling
+rq4file_level.py —  File-level SATD survival (paper-faithful) with robust git handling
 
 - Introduction (per FILE):
     time_days = first SATD date in the file - file creation date
