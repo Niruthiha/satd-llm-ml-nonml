@@ -36,7 +36,7 @@ Place these in `/root/satd_detection/`:
 
 ### SATD Detector
 - `satd_detector.jar` must be located at:  
-  `/root/satd_detection/satd_detector.jar`
+  [`/root/satd_detection/satd_detector.jar`](https://dl.acm.org/doi/10.1145/3183440.3183478)
 
 ### Python Libraries
 Install:
