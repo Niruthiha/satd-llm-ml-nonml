@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-phase5b_rq5_model_building_ml.py ( Cohort Only)
+rq5model_and_feature.py
 
 This script replaces the R script AND the model building notebook for RQ5.
 It reads the final dataset from Phase 5a and:
