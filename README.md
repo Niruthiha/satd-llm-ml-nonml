@@ -207,5 +207,19 @@ python rq4file_level.py
 
 ---
 
+# RQ5 Model & Feature Importance Script (rq5model_and_feature.py)
+
+This script replaces both the original R script and the model-building notebook used
+for RQ5 in the Bhatia et al. (2024) replication package.
+
+It consumes the final dataset produced in Phase 5a and performs the following tasks:
+
+1. Calculates and visualizes a Spearman correlation heatmap for all numerical features.
+2. Trains a Random Forest classifier to predict whether a SATD comment is
+   "long-lasting" or "quickly removed".
+3. Outputs the most important predictive features, directly addressing the
+   research question for RQ5.
+
+
 # End of Document
 
