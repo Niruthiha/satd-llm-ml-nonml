@@ -7,7 +7,7 @@ This repository contains the replication package for the paper "Self-Admitted Te
 
 # SATD Analysis Replication Pipeline
 
-This project contains two distinct Python pipelines for replicating and extending the quantitative SATD survival analyses from **Bhatia et al. (2024)**.
+This project contains two distinct Python pipelines for replicating and extending the quantitative SATD survival analyses from **Bhatia et al. (2024)**.  https://github.com/Aaditya-Bhatia/Self-Admitted-Technical-Debt-inMachine-Learning-Software 
 
 ---
 
