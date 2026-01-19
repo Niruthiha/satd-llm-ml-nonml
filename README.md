@@ -231,13 +231,13 @@ If you use this replication package, please cite our paper:
 ### BibTeX
 
 ```bibtex
-@article{selvanayagam2026satd,
-  title   = {Self-Admitted Technical Debt in LLM Software: An Empirical Comparison with ML and Non-ML Software},
-  author  = {Selvanayagam, Niruthiha and Ghaleb, Taher A. and Abdellatif, Manel},
-  journal = {arXiv preprint arXiv:2601.06266},
-  year    = {2026}
+@inproceedings{selvanayagam2026satd,
+  title={Self-Admitted Technical Debt in LLM Software: An Empirical Comparison with ML and Non-ML Software},
+  author={Selvanayagam, Niruthiha and Ghaleb, Taher A. and Abdellatif, Manel},
+  booktitle={Proceedings of the 33rd IEEE International Conference on Software Analysis, Evolution and Reengineering (SANER)},
+  year={2026},
+  organization={IEEE}
 }
-
 
 
 
