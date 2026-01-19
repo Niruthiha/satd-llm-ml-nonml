@@ -1,7 +1,7 @@
 
-# SATD Genealogy Analysis Pipeline
+# SATD Replication Package
 
-This README explains the 3-phase "Genealogy-Level" pipeline and includes the specific instructions you requested about how to re-run it for the **nonml** and **llm** cohorts.
+This repository contains the replication package for the paper "Self-Admitted Technical Debt in LLM Software: An Empirical Comparison with ML and Non-ML Software" accepted at the 33rd IEEE International Conference on Software Analysis, Evolution and Reengineering (SANER) 2026. The package provides all resources needed to reproduce the experiments and results presented in the paper, including analysis scripts, our extended SATD detector, and the curated dataset of 159 LLM repositories with full git histories.
 
 ---
 
