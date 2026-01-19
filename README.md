@@ -220,6 +220,24 @@ It consumes the final dataset produced in Phase 5a and performs the following ta
 3. Outputs the most important predictive features, directly addressing the
    research question for RQ5.
 
+## How to Cite
+
+If you use this replication package, please cite our paper:
+
+> Niruthiha Selvanayagam, Taher A. Ghaleb, and Manel Abdellatif.  
+> **Self-Admitted Technical Debt in LLM Software: An Empirical Comparison with ML and Non-ML Software.**  
+> *arXiv preprint arXiv:2601.06266*, 2026.
+
+### BibTeX
+
+```bibtex
+@article{selvanayagam2026satd,
+  title   = {Self-Admitted Technical Debt in LLM Software: An Empirical Comparison with ML and Non-ML Software},
+  author  = {Selvanayagam, Niruthiha and Ghaleb, Taher A. and Abdellatif, Manel},
+  journal = {arXiv preprint arXiv:2601.06266},
+  year    = {2026}
+}
+
 
 
 
